@@ -13,11 +13,24 @@
                         <a class="nav-link" ngbNavLink><i class="ni ni-cloud-upload-96 mr-2"></i> COMPLETED</a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">Here is the Transaction List</p>
-                                <p class="description">Here is the Transaction List</p>
-                                <p class="description">Here is the Transaction List</p>
-                                <p class="description">Here is the Transaction List</p>
-                                <p class="description">Here is the Transaction List</p>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>Comments</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let transaction of filteredTransactions">
+                                            <td>{{ transaction.id }}</td>
+                                            <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
+                                            <td>{{ transaction.Comments }}</td>
+                                            <td><a href="#" class="text-info">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </ng-template>
                     </li>
@@ -139,7 +152,7 @@
                 <ngb-progressbar type="primary" [value]="60"></ngb-progressbar>
             </div>
         </div> -->
-        <!-- <div class="col-lg-5">
+    <!-- <div class="col-lg-5">
       <h3 class="h4 text-success font-weight-bold mb-5">Pagination</h3>
       <nav aria-label="Page navigation example" class="mb-4">
 
@@ -153,7 +166,7 @@
         </ngb-pagination>
       </nav>
     </div> -->
-        <!-- <div class="col-lg-5">
+    <!-- <div class="col-lg-5">
       <h3 class="h4 text-success font-weight-bold mb-5">Navigation Pills</h3>
       <div class="nav nav-pills justify-content-start">
         <ul ngbNav #nav2="ngbNav" [(activeId)]="active2" type="pills" class="nav-pills-circle">
