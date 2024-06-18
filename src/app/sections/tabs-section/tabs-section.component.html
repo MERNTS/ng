@@ -31,7 +31,7 @@
                                             <td>{{ transaction.id }}</td>
                                             <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
                                             <td>{{ transaction.Comments }}</td>
-                                            <td><a href="#" class="text-info">View</a></td>
+                                            <td><a href="#" (click)="loadTransactionDetails(transaction.id)">View</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -42,11 +42,24 @@
                         <a class="nav-link" ngbNavLink><i class="ni ni-bell-55 mr-2"></i> IN PROGRESS</a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid.
-                                    Aliquip placeat
-                                    salvia
-                                    cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
-                                    qui.</p>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>Comments</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let transaction of filteredTransactions">
+                                            <td>{{ transaction.id }}</td>
+                                            <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
+                                            <td>{{ transaction.Comments }}</td>
+                                            <td><a href="#" class="text-info">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </ng-template>
                     </li>
@@ -54,12 +67,24 @@
                         <a class="nav-link" ngbNavLink><i class="ni ni-calendar-grid-58 mr-2"></i> REJECTED</a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin.
-                                    Nesciunt tofu
-                                    stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg
-                                    carles vegan
-                                    helvetica.
-                                    Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Date</th>
+                                            <th>Comments</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let transaction of filteredTransactions">
+                                            <td>{{ transaction.id }}</td>
+                                            <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
+                                            <td>{{ transaction.Comments }}</td>
+                                            <td><a href="#" class="text-info">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </ng-template>
                     </li>
