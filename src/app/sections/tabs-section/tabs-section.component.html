@@ -56,7 +56,7 @@
                                             <td>{{ transaction.id }}</td>
                                             <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
                                             <td>{{ transaction.Comments }}</td>
-                                            <td><a href="#" class="text-info">View</a></td>
+                                            <td><a href="#" (click)="loadTransactionDetails(transaction.id)">View</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -81,7 +81,7 @@
                                             <td>{{ transaction.id }}</td>
                                             <td>{{ transaction.date | date: 'dd/MM/yyyy' }}</td>
                                             <td>{{ transaction.Comments }}</td>
-                                            <td><a href="#" class="text-info">View</a></td>
+                                            <td><a href="#" (click)="loadTransactionDetails(transaction.id)">View</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -104,7 +104,24 @@
                         <a class="nav-link" ngbNavLink> Home</a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">{{ transactionDetails.description }}</p>
+                                <h2>Transaction Details</h2>
+                                <p><strong>ID:</strong> {{ transactionDetails.id }}</p>
+                                <p><strong>Date:</strong> {{ transactionDetails.date | date: 'dd-MM-yyyy' }}</p>
+                                <p><strong>Amount:</strong> {{ transactionDetails.Amount }} {{ transactionDetails.CurrencyCd }}</p>
+                                
+                                <h4>Sender Details</h4>
+                                <p><strong>ID Number:</strong> {{ transactionDetails.sender?.IDNumber }}</p>
+                                <p><strong>Name:</strong> {{ transactionDetails.sender?.firstName }} {{ transactionDetails.sender?.lastName }}</p>
+                                <p><strong>Date of Birth:</strong> {{ transactionDetails.sender?.dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+                                
+                                <h4>Recipient Details</h4>
+                                <p><strong>Account Number:</strong> {{ transactionDetails.recipient?.accountNumber }}</p>
+                                <p><strong>Name:</strong> {{ transactionDetails.recipient?.firstName }} {{ transactionDetails.recipient?.lastName }}</p>
+                                <p><strong>Email:</strong> {{ transactionDetails.recipient?.email }}</p>
+                                <p><strong>Bank:</strong> {{ transactionDetails.recipient?.bank }}</p>
+                                
+                                <p><strong>Comments:</strong> {{ transactionDetails.Comments }}</p>
+                                <p><strong>Status:</strong> {{ transactionDetails.status }}</p>                                
                             </div>
                         </ng-template>
                     </li>
@@ -114,11 +131,7 @@
                         </a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">Cosby sweater eu banh mi, qui irure terry richardson ex squid.
-                                    Aliquip placeat
-                                    salvia
-                                    cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
-                                    qui.</p>
+                                <p class="description">{{ transactionDetails.amount }}</p>
                             </div>
                         </ng-template>
                     </li>
@@ -128,12 +141,7 @@
                         </a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <p class="description">Raw denim you probably haven't heard of them jean shorts Austin.
-                                    Nesciunt tofu
-                                    stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg
-                                    carles vegan
-                                    helvetica.
-                                    Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+                                <p class="description">{{ transactionDetails.sender }}</p>
                             </div>
                         </ng-template>
                     </li>

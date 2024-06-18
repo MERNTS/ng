@@ -22,11 +22,14 @@ export class TabsSectionComponent implements OnInit {
       this.filteredTransactions = event.detail;
     });
   }
+
   loadTransactionDetails(transactionId: number) {
     // Replace with your actual API endpoint and HTTP method (GET, POST, etc.)
-    this.http.get<any>(`/api/transactions/${transactionId}`).subscribe(
+    console.log(transactionId)
+    this.http.get<any>(`http://localhost:3001/api/transactions/${transactionId}`).subscribe(
       (response) => {
         this.transactionDetails = response; // Assuming response is in JSON format
+        console.log(this.transactionDetails)
       },
       (error) => {
         console.error('Failed to fetch transaction details', error);
