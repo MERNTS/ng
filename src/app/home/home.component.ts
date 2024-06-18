@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from '../transaction.service';
 
 @Component({
   selector: 'app-home',
@@ -18,131 +19,26 @@ export class HomeComponent implements OnInit {
   fromDate: string;
   toDate: string;
 
-  transactions = [
-    {
-      id: '1',
-      date: 1639502071000,
-      sender: {
-        firstName: 'John',
-        lastName: 'Smith',
-        dateOfBirth: '1970-01-23',
-        IDNumber: '100001'
-      },
-      recipient: {
-        firstName: 'Jane',
-        lastName: 'doe',
-        email: 'janedoe@company.com',
-        accountNumber: '200001',
-        bank: 'TD'
-      },
-      Amount: 100.00,
-      CurrencyCd: 'CAD',
-      Comments: 'Utility bill',
-      status: 'COMPLETED'
-    },
-    {
-      id: '2',
-      date: 1639486575000,
-      sender: {
-        firstName: 'John2',
-        lastName: 'Smith',
-        dateOfBirth: '1970-02-23',
-        IDNumber: '100001'
-      },
-      recipient: {
-        firstName: 'Jane2',
-        lastName: 'doe',
-        email: 'janedoe@company2.com',
-        accountNumber: '200001',
-        bank: 'TD'
-      },
-      Amount: 100.00,
-      CurrencyCd: 'USD',
-      Comments: 'Rent',
-      status: 'PENDING'
-    },
-    {
-      id: '3',
-      date: 1639478930000,
-      sender: {
-        firstName: 'John3',
-        lastName: 'Smith',
-        dateOfBirth: '1970-03-23',
-        IDNumber: '100001'
-      },
-      recipient: {
-        firstName: 'Jane3',
-        lastName: 'doe',
-        email: 'janedoe@company3.com',
-        accountNumber: '200001',
-        bank: 'CIBC'
-      },
-      Amount: 300.00,
-      CurrencyCd: 'USD',
-      Comments: 'Insurance Premium',
-      status: 'IN PROGRESS'
-    },
-    {
-      id: '4',
-      date: 1638997755000,
-      sender: {
-        firstName: 'John4',
-        lastName: 'Smith',
-        dateOfBirth: '1970-04-23',
-        IDNumber: '100001'
-      },
-      recipient: {
-        firstName: 'Jane4',
-        lastName: 'doe',
-        email: 'janedoe@company4.com',
-        accountNumber: '200001',
-        bank: 'RBC'
-      },
-      Amount: 200.00,
-      CurrencyCd: 'CAD',
-      Comments: 'Cash Transfer',
-      status: 'REJECTED'
-    }
-  ];
-
+  transactions = [];
   filteredTransactions = this.transactions;
 
-  constructor() { }
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit() { }
 
   searchTransactions() {
-    const fromDateTimestamp = new Date(this.fromDate).getTime();
-    const toDateTimestamp = new Date(this.toDate).getTime();
-
-    this.filteredTransactions = this.transactions.filter(transaction => {
-      return transaction.date >= fromDateTimestamp && transaction.date <= toDateTimestamp;
+    console.log(`Fetching transactions from ${this.fromDate} to ${this.toDate}`);
+    this.transactionService.getTransactions(this.fromDate, this.toDate).subscribe((data: any) => {
+      console.log('Data fetched from API:', data);
+      this.filteredTransactions = data;
+      this.passDataToSections(data);
     });
   }
+
+  passDataToSections(data: any) {
+    console.log('Dispatching transactionsFetched event with data1:', data);
+    const event = new CustomEvent('transactionsFetched', { detail: data });
+    console.log('Dispatching transactionsFetched event with data2:', data);
+    window.dispatchEvent(event);
+  }
 }
-
-
-
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//     selector: 'app-home',
-//     templateUrl: './home.component.html',
-//     styleUrls: ['./home.component.scss']
-// })
-
-// export class HomeComponent implements OnInit {
-//     model = {
-//         left: true,
-//         middle: false,
-//         right: false
-//     };
-
-//     focus;
-//     focus1;
-//     constructor() { }
-
-//     ngOnInit() {}
-// }
-
-

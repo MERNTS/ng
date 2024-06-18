@@ -1,3 +1,4 @@
+// tab-SectionsComponent.component.ts
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,8 +13,14 @@ export class TabsSectionComponent implements OnInit {
   active1 = 1;
   active2 = 1;
 
-  constructor() { }
+  filteredTransactions: any[] = [];
 
+  constructor() {
+    window.addEventListener('transactionsFetched', (event: CustomEvent) => {
+      this.filteredTransactions = event.detail;
+    });
+  }
+  
   ngOnInit() {
   }
 
