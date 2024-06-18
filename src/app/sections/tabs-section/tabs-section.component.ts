@@ -14,30 +14,50 @@ export class TabsSectionComponent implements OnInit {
   active1 = 1;
   active2 = 1;
 
+  activeTab: string = 'COMPLETED';
   filteredTransactions: any[] = [];
+  transactions: any[] = [];
   transactionDetails: any = {};
+  
 
   constructor(private http: HttpClient) {
     window.addEventListener('transactionsFetched', (event: CustomEvent) => {
       this.filteredTransactions = event.detail;
+      this.filterTransactions(this.activeTab);
     });
   }
 
-  loadTransactionDetails(transactionId: number) {
-    // Replace with your actual API endpoint and HTTP method (GET, POST, etc.)
-    console.log(transactionId)
-    this.http.get<any>(`http://localhost:3001/api/transactions/${transactionId}`).subscribe(
-      (response) => {
-        this.transactionDetails = response; // Assuming response is in JSON format
-        console.log(this.transactionDetails)
+  ngOnInit() {
+    this.fetchTransactions();
+   }
+
+   fetchTransactions() {
+    this.http.get<any[]>('http://localhost:3001/api/transactions').subscribe(
+      (data) => {
+        this.transactions = data;
+        this.filterTransactions(this.activeTab); // Filter initially based on default tab
       },
       (error) => {
-        console.error('Failed to fetch transaction details', error);
+        console.error('Failed to fetch transactions', error);
         // Handle error as needed
       }
     );
   }
 
-  ngOnInit() { }
+  filterTransactions(status: string): void {
+    this.activeTab = status; // Update active tab
+    this.filteredTransactions = this.transactions.filter(transaction => transaction.status === status);
+  }
+
+  loadTransactionDetails(transactionId: number) {
+    this.http.get<any>(`http://localhost:3001/api/transactions/${transactionId}`).subscribe(
+      (response) => {
+        this.transactionDetails = response; // Assuming response is in JSON format
+      },
+      (error) => {
+        console.error('Failed to fetch transaction details', error);
+      }
+    );
+  }
 
 }
