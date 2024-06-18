@@ -98,13 +98,10 @@
                 <small class="text-uppercase font-weight-bold">Transaction Details</small>
             </div>
             <div class="custom-tab-content flex-column flex-md-row">
-                <ul ngbNav #nav1="ngbNav" [(activeId)]="active" class="nav nav-pills justify-content-center"
-                    type="pills">
+                <ul ngbNav #nav1="ngbNav" [(activeId)]="active" class="nav nav-pills justify-content-center" type="pills">
                     <li class="nav-item" [ngbNavItem]="1">
-                        <a class="nav-link" ngbNavLink> Home</a>
                         <ng-template ngbNavContent>
                             <div class="tab-content">
-                                <h2>Transaction Details</h2>
                                 <p><strong>ID:</strong> {{ transactionDetails.id }}</p>
                                 <p><strong>Date:</strong> {{ transactionDetails.date | date: 'dd-MM-yyyy' }}</p>
                                 <p><strong>Amount:</strong> {{ transactionDetails.Amount }} {{ transactionDetails.CurrencyCd }}</p>
@@ -122,26 +119,6 @@
                                 
                                 <p><strong>Comments:</strong> {{ transactionDetails.Comments }}</p>
                                 <p><strong>Status:</strong> {{ transactionDetails.status }}</p>                                
-                            </div>
-                        </ng-template>
-                    </li>
-                    <li class="nav-item" [ngbNavItem]="2">
-                        <a class="nav-link" ngbNavLink>
-                            Profile
-                        </a>
-                        <ng-template ngbNavContent>
-                            <div class="tab-content">
-                                <p class="description">{{ transactionDetails.amount }}</p>
-                            </div>
-                        </ng-template>
-                    </li>
-                    <li class="nav-item" [ngbNavItem]="3">
-                        <a class="nav-link" ngbNavLink>
-                            Messages
-                        </a>
-                        <ng-template ngbNavContent>
-                            <div class="tab-content">
-                                <p class="description">{{ transactionDetails.sender }}</p>
                             </div>
                         </ng-template>
                     </li>
