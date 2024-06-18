@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionService } from '../transaction.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,20 @@ export class HomeComponent implements OnInit {
   transactions = [];
   filteredTransactions = this.transactions;
 
-  constructor(private transactionService: TransactionService) { }
+  constructor(private transactionService: TransactionService) {
+    this.setDefaultValues();
+   }
+
+   setDefaultValues() {
+    // Default fromDate to '01-01-2020'
+    const defaultFromDate = new Date('2020-01-01');
+    this.fromDate = formatDate(defaultFromDate, 'yyyy-MM-dd', 'en-US');
+
+    // Default toDate to today's date
+    const today = new Date();
+    this.toDate = formatDate(today, 'yyyy-MM-dd', 'en-US');
+  }
+
 
   ngOnInit() { }
 
