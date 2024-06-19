@@ -70,14 +70,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "argon-design-system-angular:build"
+            "buildTarget": "argon-design-system-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "argon-design-system-angular:build:production"
+              "buildTarget": "argon-design-system-angular:build:production"
             },
             "development": {
-              "browserTarget": "argon-design-system-angular:build:development"
+              "buildTarget": "argon-design-system-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "argon-design-system-angular:build"
+            "buildTarget": "argon-design-system-angular:build"
           }
         },
         "test": {
